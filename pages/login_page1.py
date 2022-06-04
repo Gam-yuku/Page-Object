@@ -3,6 +3,11 @@ from .locators import LoginPageLocators
 from selenium.webdriver.common.by import By
 
 class LoginPage(BasePage):
+    def should_be_login_page(self):
+        self.should_be_login_url()
+        self.should_be_login_form()
+        self.should_be_register_form()
+
     def should_be_login_url(self): # В методе should_be_login_url реализуйте проверку, что подстрока "login" есть в текущем url браузера
         assert 'login' in self.browser.current_url, 'ссылка не содержит "login"'   
 
