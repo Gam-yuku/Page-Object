@@ -1,8 +1,13 @@
 from .base_page import BasePage #если модуль из той же папки указывается точка
-from .locators import MainPageLocators
+# from .locators import MainPageLocators
 from selenium.webdriver.common.by import By
 from .login_page1 import LoginPage
 
+class MainPage(BasePage): #заглушка
+    def __init__(self, *args, **kwargs):
+        super(MainPage, self).__init__(*args, **kwargs)
+
+"""
 class MainPage(BasePage): 
     def go_to_login_page(self):
         login_link = self.browser.find_element(*MainPageLocators.LOGIN_LINK) #символ * указывает на то, что мы передали именно пару, и этот кортеж нужно распаковать
@@ -19,3 +24,4 @@ class MainPage(BasePage):
     # def go_to_login_page1(self):
     #     link = self.browser.find_element(*MainPageLocators.LOGIN_LINK)
     #     link.click()
+"""

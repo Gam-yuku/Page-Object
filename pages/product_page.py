@@ -6,7 +6,7 @@ import math
 
 class ProductPage(BasePage): 
     def adding_to_basket(self):
-        login_link = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BTN)
+        login_link = self.browser.find_element(*ProductPageLocators.INNER_PAGE_BTN_ADD_TO_BASKET)
         login_link.click()
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
@@ -25,19 +25,19 @@ class ProductPage(BasePage):
         self.message_added_to_basket()
         self.cost_basket_equals_price_product()
     def message_added_to_basket(self):
-        assert self.is_element_present(*ProductPageLocators.BAR_ADDED_TO_BASKET), "Нет сообщения о том, что товар добавлен в корзину"
-        assert (self.browser.find_element(*ProductPageLocators.NAME_BOOK_INNER_PAGE)).text == (self.browser.find_element(*ProductPageLocators.NAME_BOOK_BASKET_PAGE)).text, "Название товара в сообщении не совпадает с добавленным товаром"
+        assert self.is_element_present(*ProductPageLocators.BASKET_PAGE_SUCCESS_MESSAGE), "Нет сообщения о том, что товар добавлен в корзину"
+        assert (self.browser.find_element(*ProductPageLocators.INNER_PAGE_NAME_BOOK)).text == (self.browser.find_element(*ProductPageLocators.BASKET_PAGE_NAME_BOOK)).text, "Название товара в сообщении не совпадает с добавленным товаром"
     def cost_basket_equals_price_product(self):
-        assert self.is_element_present(*ProductPageLocators.COST_BOOK), "Нет сообщения со стоимостью корзины"
-        assert (self.browser.find_element(*ProductPageLocators.COST_BOOK)).text==(self.browser.find_element(*ProductPageLocators.PRICE_BOOK)).text, "Стоимость корзины и цена совпадают"
-        
-    """
-    Сообщение о том, что товар добавлен в корзину. Название товара в сообщении должно совпадать с тем товаром, который вы действительно добавили.
-    Сообщение со стоимостью корзины. Стоимость корзины совпадает с ценой товара. 
-    """
+        assert self.is_element_present(*ProductPageLocators.BASKET_PAGE_COST_BOOK), "Нет сообщения со стоимостью корзины"
+        assert (self.browser.find_element(*ProductPageLocators.BASKET_PAGE_COST_BOOK)).text==(self.browser.find_element(*ProductPageLocators.INNER_PAGE_PRICE_BOOK)).text, "Стоимость корзины и цена совпадают"
 
-
-
+    def should_not_be_success_message(self): #упадет, как только увидит искомый элемент. Не появился: успех, тест зеленый. 
+        assert self.is_not_element_present(*ProductPageLocators.BASKET_PAGE_SUCCESS_MESSAGE), \
+        "'Success message' is presented, but should not be"
+   
+    def should_disappear_success_message(self): #будет ждать до тех пор, пока элемент не исчезнет.
+        assert self.is_disappeared(*ProductPageLocators.BASKET_PAGE_SUCCESS_MESSAGE), \
+        "'Success message' didn't disappear, but should be"
 
 
 
