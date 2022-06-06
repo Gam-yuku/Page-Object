@@ -24,3 +24,10 @@ class LoginPage(BasePage):
         assert self.is_element_present(*LoginPageLocators.REGISTRATION_PASSWORD), "password input is not presented"
         assert self.is_element_present(*LoginPageLocators.REGISTRATION_PASSWORD_REPEAT), "repeated password input is not presented"
         assert self.is_element_present(*LoginPageLocators.REGISTRATION_SUBMIT_BTN), "registration submit button is not presented"
+
+    def register_new_user(self, email, password):
+        self.browser.find_element(*LoginPageLocators.REGISTRATION_EMAIL).send_keys(email)
+        self.browser.find_element(*LoginPageLocators.REGISTRATION_PASSWORD).send_keys(password)
+        self.browser.find_element(*LoginPageLocators.REGISTRATION_PASSWORD_REPEAT).send_keys(password)
+        self.browser.find_element(*LoginPageLocators.REGISTRATION_SUBMIT_BTN).click()      
+        assert self.is_element_present(*LoginPageLocators.REGISTRATION_SUCCES), "'Registration message' is not presented"
