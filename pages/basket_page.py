@@ -1,4 +1,4 @@
-from .base_page import BasePage #если модуль из той же папки указывается точка
+from .base_page import BasePage
 from .locators import BasketPageLocators
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoAlertPresentException

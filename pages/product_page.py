@@ -1,4 +1,4 @@
-from .base_page import BasePage #если модуль из той же папки указывается точка
+from .base_page import BasePage
 from .locators import ProductPageLocators
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoAlertPresentException
@@ -31,11 +31,11 @@ class ProductPage(BasePage):
         assert self.is_element_present(*ProductPageLocators.BASKET_PAGE_COST_BOOK), "Нет сообщения со стоимостью корзины"
         assert (self.browser.find_element(*ProductPageLocators.BASKET_PAGE_COST_BOOK)).text==(self.browser.find_element(*ProductPageLocators.INNER_PAGE_PRICE_BOOK)).text, "Стоимость корзины и цена совпадают"
 
-    def should_not_be_success_message(self): #упадет, как только увидит искомый элемент. Не появился: успех, тест зеленый. 
+    def should_not_be_success_message(self):
         assert self.is_not_element_present(*ProductPageLocators.BASKET_PAGE_SUCCESS_MESSAGE), \
         "'Success message' is presented, but should not be"
    
-    def should_disappear_success_message(self): #будет ждать до тех пор, пока элемент не исчезнет.
+    def should_disappear_success_message(self):
         assert self.is_disappeared(*ProductPageLocators.BASKET_PAGE_SUCCESS_MESSAGE), \
         "'Success message' didn't disappear, but should be"
 

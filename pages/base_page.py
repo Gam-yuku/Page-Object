@@ -1,4 +1,3 @@
-import pytest
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import TimeoutException
@@ -23,7 +22,7 @@ class BasePage():
         self.browser.implicitly_wait(timeout)
 
     def go_to_login_page(self):
-        login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK) #символ * указывает на то, что мы передали именно пару, и этот кортеж нужно распаковать
+        login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         login_link.click()
 
     def should_be_login_link(self):
